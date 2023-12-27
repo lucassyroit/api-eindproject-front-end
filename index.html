@@ -1,0 +1,41 @@
+<html>
+<head>
+    <script defer src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Football | API Development</title>
+</head>
+<body>
+<h1>Football | API Development</h1>
+<div x-data="{
+    responsedata: null,
+    async getData() {
+        this.responsedata = await (await fetch('http://localhost:8000/teams')).json();
+        console.log(this.responsedata)
+    }
+}">
+    <button x-on:click="getData">Request all teams</button>
+    <table>
+        <tr>
+            <template x-for="item in responsedata">
+                <td>Club name: <strong x-text="item.name"></strong></td>
+            </template>
+        </tr>
+        <tr>
+            <template x-for="item in responsedata">
+                <td>City: <strong x-text="item.city"></strong></td>
+            </template>
+        </tr>
+        <tr>
+            <template x-for="item in responsedata">
+                <td>Stadium: <strong x-text="item.stadium"></strong></td>
+            </template>
+        </tr>
+        <tr>
+            <template x-for="item in responsedata">
+                <td>Founded: <strong x-text="item.founded_year"></strong></td>
+            </template>
+        </tr>
+    </table>
+</div>
+</body>
+</html
